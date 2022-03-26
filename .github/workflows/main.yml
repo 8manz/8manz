@@ -1,0 +1,40 @@
+name: Update README.md
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '* * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v2
+    - name: Setup python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9
+        architecture: x64
+    - name: Install requirements
+      run: python3 -m pip install -r requirements.txt
+    - name: Update README.md
+      run: |-
+        python3 update.py ${{ secrets.GH_TOKEN }}
+    - name: Commit new data
+      run: |-
+        git diff
+        git config --global user.email 'action@github.com'
+        git config --global user.name 'Github Action'
+        git add -A
+        git commit -m 'Updated data' || exit 0
+    - name: Pull changes
+      run: |-
+        git pull -r
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GH_TOKEN }}
