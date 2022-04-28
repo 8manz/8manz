@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '* * * * *'
+    - cron: '@hourly'
   workflow_dispatch:
 
 jobs:
