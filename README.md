@@ -6,9 +6,9 @@
 | | | | |_ -| -_| | |   |
 |_____|_|___|___|___|_|_|
 
-[python: 0][bash: 0][golang: 0][c: 0]
-[c++: 0][julia: 0][haskell: 0]
+[python: 6][bash: 3][golang: 3][c: 2]
+[c++: 2][julia: 0][haskell: 0]
 
 ```
-
+  
 <!-- end -->
