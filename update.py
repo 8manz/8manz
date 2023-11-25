@@ -1,7 +1,18 @@
 import re
 import sys
 import pathlib
+from typing import NamedTuple
+
 import requests
+
+class LanguageNames(NamedTuple):
+    lang_python: int
+    lang_bash: int
+    lang_go: int
+    lang_c: int
+    lang_cplusplus: int
+    lang_julia: int
+    lang_haskell: int
 
 def language_stats(api_url, token, readme_path):
     headers = {
@@ -11,29 +22,37 @@ def language_stats(api_url, token, readme_path):
     request = requests.get(api_url, headers=headers, timeout=3)
     json = request.json()
 
-    lang_python = 0
-    lang_bash = 0
-    lang_go = 0
-    lang_c = 0
+    language_name_list = [
+            'Python',
+            'Go',
+            'Shell',
+            'C',
+            'C++',
+            'Julia',
+            'Haskell'
+    ]
 
-    for language in json:
-        lang_name = language['language']
-        if lang_name == 'Python':
-            lang_python += 1
-        elif lang_name == 'Go':
-            lang_go += 1
-        elif lang_name == 'Shell':
-            lang_bash += 1
-        elif lang_name == 'C':
-            lang_c += 1
+    language_found_in_repos_list = [language for language in json if language['language'] in language_name_list]
 
+    names = LanguageNames(
+            language_found_in_repos_list.count('Python'), language_found_in_repos_list.count('Go'),
+            language_found_in_repos_list.count('Shell'), language_found_in_repos_list.count('C'),
+            language_found_in_repos_list.count('C++'), language_found_in_repos_list.count('Julia'),
+            language_found_in_repos_list.count('Haskell')
+    )
+
+    update_content(names, readme_path)
+
+def update_content(names: LanguageNames, readme_path):
     updated_content = f'''
 ```python
-                  _____       | | |
-_ _ _ _ ____ ____ |   | _  _  |_|_|           Python: {lang_python}
-| | | | [__  |___ |   | |\ |    |             Bash: {lang_bash}
-|_|_| | ___] |___ |___| | \|    |             Go: {lang_go}
-                                |             C: {lang_c}
+       _         ___
+ _ _ _|_|___ ___|   |___ 
+| | | | |_ -| -_| | |   |
+|_____|_|___|___|___|_|_|
+
+[python: {names.lang_python}][bash: {names.lang_bash}][golang: {names.lang_go}][c: {names.lang_c}]
+[c++: {names.lang_c}][julia: {names.lang_julia}][haskell: {names.lang_haskell}]
 
 ```
   '''
