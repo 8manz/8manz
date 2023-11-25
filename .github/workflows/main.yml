@@ -30,7 +30,7 @@ jobs:
         git config --global user.email 'action@github.com'
         git config --global user.name 'Github Action'
         git add -A
-        git commit -m 'Updated data' || exit 0
+        git commit -m 'docs: update README.md' || exit 0
     - name: Pull changes
       run: |-
         git pull -r
