@@ -46,10 +46,10 @@ def language_stats(api_url, token, readme_path):
 def update_content(names: LanguageNames, readme_path):
     updated_content = f'''
 ```python
-       _         ___
- _ _ _|_|___ ___|   |___ 
-| | | | |_ -| -_| | |   |
-|_____|_|___|___|___|_|_|
+ ___
+( _ )_ __  __ _ _ _  ___
+/ _ \ '  \/ _` | ' \|_ /
+\___/_|_|_\__,_|_||_/__|
 
 [python: {names.lang_python}][bash: {names.lang_bash}][golang: {names.lang_go}][c: {names.lang_c}]
 [c++: {names.lang_c}][julia: {names.lang_julia}][haskell: {names.lang_haskell}]
