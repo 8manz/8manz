@@ -35,8 +35,8 @@ def language_stats(api_url, token, readme_path):
     language_found_in_repos_list = [language['language'] for language in json if language['language'] in language_name_list]
 
     names = LanguageNames(
-            language_found_in_repos_list.count('Python'), language_found_in_repos_list.count('Go'),
-            language_found_in_repos_list.count('Shell'), language_found_in_repos_list.count('C'),
+            language_found_in_repos_list.count('Python'), language_found_in_repos_list.count('Shell'),
+            language_found_in_repos_list.count('Go'), language_found_in_repos_list.count('C'),
             language_found_in_repos_list.count('C++'), language_found_in_repos_list.count('Julia'),
             language_found_in_repos_list.count('Haskell')
     )
