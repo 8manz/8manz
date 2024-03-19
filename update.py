@@ -52,7 +52,7 @@ def update_content(names: LanguageNames, readme_path):
 \___/_|_|_\__,_|_||_/__|
 
 [python: {names.lang_python}][bash: {names.lang_bash}][golang: {names.lang_go}][c: {names.lang_c}]
-[c++: {names.lang_c}][julia: {names.lang_julia}][haskell: {names.lang_haskell}]
+[c++: {names.lang_cplusplus}][julia: {names.lang_julia}][haskell: {names.lang_haskell}]
 
 ```
   '''
