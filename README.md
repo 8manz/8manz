@@ -6,7 +6,7 @@
 / _ \ '  \/ _` | ' \|_ /
 \___/_|_|_\__,_|_||_/__|
 
-[python: 6][bash: 4][golang: 3][c: 3]
+[python: 6][bash: 4][golang: 3][c: 4]
 [c++: 2][julia: 0][haskell: 0]
 
 ```
