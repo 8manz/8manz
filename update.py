@@ -14,6 +14,8 @@ class LanguageNames(NamedTuple):
     lang_cplusplus: int
     lang_julia: int
     lang_haskell: int
+    lang_zig: int
+    lang_rust: int
 
 def language_stats(api_url, token, readme_path):
     headers = {
@@ -30,7 +32,9 @@ def language_stats(api_url, token, readme_path):
             'C',
             'C++',
             'Julia',
-            'Haskell'
+            'Haskell',
+            'Zig',
+            'Rust'
     ]
 
     language_found_in_repos_list = Counter([language['language'] for language in json if language['language'] in language_name_list])
@@ -39,7 +43,8 @@ def language_stats(api_url, token, readme_path):
             language_found_in_repos_list['Python'], language_found_in_repos_list['Shell'],
             language_found_in_repos_list['Go'], language_found_in_repos_list['C'],
             language_found_in_repos_list['C++'], language_found_in_repos_list['Julia'],
-            language_found_in_repos_list['Haskell']
+            language_found_in_repos_list['Haskell'], language_found_in_repos_list['Zig'],
+            language_found_in_repos_list['Rust']
     )
 
     update_content(names, readme_path)
@@ -53,8 +58,10 @@ def update_content(names: LanguageNames, readme_path):
 \___/_|_|_\__,_|_||_/__|
 
 [python: {names.lang_python}][bash: {names.lang_bash}][golang: {names.lang_go}][c: {names.lang_c}]
-[c++: {names.lang_cplusplus}][julia: {names.lang_julia}][haskell: {names.lang_haskell}]
+[c++: {names.lang_cplusplus}][julia: {names.lang_julia}][haskell: {names.lang_haskell}][zig: {names.lang_zig}]
+[rust: {names.lang_rust}]
 
+<img src="assets/winter.gif" alt="winter">
 ```
   '''
 
