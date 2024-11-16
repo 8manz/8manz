@@ -10,7 +10,8 @@
 [c++: 2][julia: 0][haskell: 0][zig: 0]
 [rust: 0]
 
-<img src="assets/winter.gif" alt="winter">
 ```
-  
+
+<img src="assets/winter.gif" alt="winter">
+
 <!-- end -->
