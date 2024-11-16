@@ -61,9 +61,10 @@ def update_content(names: LanguageNames, readme_path):
 [c++: {names.lang_cplusplus}][julia: {names.lang_julia}][haskell: {names.lang_haskell}][zig: {names.lang_zig}]
 [rust: {names.lang_rust}]
 
-<img src="assets/winter.gif" alt="winter">
 ```
-  '''
+
+<img src="assets/winter.gif" alt="winter">
+'''
 
     with open (readme_path, 'r', encoding="utf-8") as readme:
         readme_content = readme.read()
