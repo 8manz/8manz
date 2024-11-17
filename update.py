@@ -1,23 +1,11 @@
 import re
 import sys
 import pathlib
-from typing import NamedTuple
 from collections import Counter
 
 import requests
 
-class LanguageNames(NamedTuple):
-    lang_python: int
-    lang_bash: int
-    lang_go: int
-    lang_c: int
-    lang_cplusplus: int
-    lang_julia: int
-    lang_haskell: int
-    lang_zig: int
-    lang_rust: int
-
-def language_stats(api_url, token, readme_path):
+def language_stats(api_url: str, token: str, readme_path: str) -> None:
     headers = {
         'Authorization': f'token {token}'
     }
@@ -25,31 +13,39 @@ def language_stats(api_url, token, readme_path):
     request = requests.get(api_url, headers=headers, timeout=3)
     json = request.json()
 
-    language_name_list = [
-            'Python',
-            'Go',
-            'Shell',
-            'C',
-            'C++',
+    # languages to add that aren't auto-added
+    # due to no repos using them
+    # that you want to add
+    whitelist_languages = [
             'Julia',
             'Haskell',
             'Zig',
             'Rust'
     ]
 
-    language_found_in_repos_list = Counter([language['language'] for language in json if language['language'] in language_name_list])
+    blacklist_languages = [
+            'Dockerfile'
+    ]
 
-    names = LanguageNames(
-            language_found_in_repos_list['Python'], language_found_in_repos_list['Shell'],
-            language_found_in_repos_list['Go'], language_found_in_repos_list['C'],
-            language_found_in_repos_list['C++'], language_found_in_repos_list['Julia'],
-            language_found_in_repos_list['Haskell'], language_found_in_repos_list['Zig'],
-            language_found_in_repos_list['Rust']
-    )
+    languages_found_in_repos: dict = Counter()
+    for repo in json:
+        lang = repo.get('language')
+        if lang is not None and lang not in blacklist_languages:
+            languages_found_in_repos[lang] += 1
 
-    update_content(names, readme_path)
+    for lang in whitelist_languages:
+        if lang not in languages_found_in_repos.keys():
+            languages_found_in_repos[lang] = 0
 
-def update_content(names: LanguageNames, readme_path):
+    formatted_language_list : str = ''
+    for index, (lang, count) in enumerate(languages_found_in_repos.items()):
+        if index % 4 == 0:
+            formatted_language_list += '\n'
+        formatted_language_list += f'[{lang.lower()}: {count}]'
+
+    update_content(formatted_language_list, readme_path)
+
+def update_content(formatted_language_list: str, readme_path: str) -> None:
     updated_content = f'''
 ```python
  ___
@@ -57,13 +53,10 @@ def update_content(names: LanguageNames, readme_path):
 / _ \ '  \/ _` | ' \|_ /
 \___/_|_|_\__,_|_||_/__|
 
-[python: {names.lang_python}][bash: {names.lang_bash}][golang: {names.lang_go}][c: {names.lang_c}]
-[c++: {names.lang_cplusplus}][julia: {names.lang_julia}][haskell: {names.lang_haskell}][zig: {names.lang_zig}]
-[rust: {names.lang_rust}]
-
+{formatted_language_list}
 ```
 
-<img src="assets/winter.gif" alt="winter">
+<img src="https://github.com/8manz/8manz/actions/workflows/main.yml/badge.svg" alt="ci"> <img src="assets/winter.gif" alt="winter">
 '''
 
     with open (readme_path, 'r', encoding="utf-8") as readme:
