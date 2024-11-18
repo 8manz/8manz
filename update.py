@@ -39,8 +39,8 @@ def language_stats(api_url: str, token: str, readme_path: str) -> None:
 
     formatted_language_list : str = ''
     for index, (lang, count) in enumerate(languages_found_in_repos.items()):
-        if index % 4 == 0:
-            formatted_language_list += '\n'
+        if index != 0 and index % 4 == 0:   # cool thing you can do is
+            formatted_language_list += '\n' # if index: 0 is false
         formatted_language_list += f'[{lang.lower()}: {count}]'
 
     update_content(formatted_language_list, readme_path)
