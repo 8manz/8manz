@@ -56,7 +56,7 @@ def update_content(formatted_language_list: str, readme_path: str) -> None:
 {formatted_language_list}
 ```
 
-<img src="https://github.com/8manz/8manz/actions/workflows/main.yml/badge.svg" alt="ci"> <img src="assets/winter.gif" alt="winter">
+<img src="https://github.com/8manz/8manz/actions/workflows/main.yml/badge.svg" alt="ci"> <img src="https://raw.githubusercontent.com/8manz/gallery/refs/heads/master/8manz-images/winter.gif" alt="winter-badge">
 '''
 
     with open (readme_path, 'r', encoding="utf-8") as readme:

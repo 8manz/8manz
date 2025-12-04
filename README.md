@@ -11,6 +11,6 @@
 [rust: 0]
 ```
 
-<img src="https://github.com/8manz/8manz/actions/workflows/main.yml/badge.svg" alt="ci"> <img src="assets/winter.gif" alt="winter">
+<img src="https://github.com/8manz/8manz/actions/workflows/main.yml/badge.svg" alt="ci"> <img src="https://raw.githubusercontent.com/8manz/gallery/refs/heads/master/8manz-images/winter.gif" alt="winter-badge">
 
 <!-- end -->
