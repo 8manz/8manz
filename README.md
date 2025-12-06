@@ -7,7 +7,7 @@
 \___/_|_|_\__,_|_||_/__|
 
 [python: 5][shell: 5][c: 5][go: 3]
-[c++: 1][julia: 0][haskell: 0][zig: 0]
+[c++: 2][julia: 0][haskell: 0][zig: 0]
 [rust: 0]
 ```
 
